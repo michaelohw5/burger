@@ -1,0 +1,43 @@
+<div class="container">
+    <div class="text-center">
+        <img src="https://cdn0.iconfinder.com/data/icons/food-2-11/128/food-13-512.png" alt="burger image"
+            id="burgerimg">
+    </div>
+
+    <h1>BURGER DEVOURER</h1>
+    <div class="row">
+        <div class="col-md-5 burger-box" id="not-devoured">
+            <!-- Pass in data from server.js -->
+            <ul class="list-group">
+                {{#each burgers}}
+                {{#unless devoured}}
+                <li class="list-group-item">
+                    <span class="label" id={{this.id}}> {{this.id}}, {{this.burger_name}} </span>
+                    <button type="button" id={{this.id}}+"_button">DEVOUR!</button>
+                </li>
+                {{/unless}}
+                {{/each}}
+            </ul>
+        </div>
+
+        <!-- Forcing a space between the two columns -->
+        <div class="col-md-2" id="blank">
+        </div>
+
+        <!-- Right list: Burgers devoured -->
+        <div class="col-md-5 burger-box" id="devoured">
+            <ul class="list-group">
+                {{#each burgers}}
+                {{#if devoured}}
+                <li class="list-group-item">
+                    <span class="label" id={{this.id}}> {{this.id}}, {{this.burger_name}} </span>
+                </li>
+                {{/if}}
+                {{/each}}
+            </ul>
+        </div>
+    </div>
+
+
+
+</div>
