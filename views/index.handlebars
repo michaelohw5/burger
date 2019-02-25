@@ -14,7 +14,7 @@
                 {{#unless devoured}}
                 <li class="list-group-item">
                     <span class="label" id={{this.id}}> {{this.id}}, {{this.burger_name}} </span>
-                    <button type="button" id={{this.id}}+"_button" class="devourbtn">DEVOUR!</button>
+                    <button type="button" data-id={{this.id}} class="devourbtn">DEVOUR!</button>
                 </li>
                 {{/unless}}
                 {{/each}}

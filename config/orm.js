@@ -19,9 +19,9 @@ var orm = {
     },
     //update a burger
     updateOne: function(columnInput, condition, cb) {
-		var queryString = "UPDATE burgers SET ?? WHERE ?";
+		var queryString = "UPDATE burgers SET devoured=? WHERE ?";
 
-		connection.query(queryString, [columnInput, condition], function(err, result) {
+		connection.query(queryString, [columnInput.devoured, condition], function(err, result) {
 			if (err) throw err;
 			
 			console.log(result);
