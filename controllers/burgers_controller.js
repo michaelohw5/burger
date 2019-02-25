@@ -9,7 +9,6 @@ router.get("/", function (req, res) {
             burgers: result
         };
         res.render("index", handlebars);
-        console.log("selectAll running");
     })
 })
 
