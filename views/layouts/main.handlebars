@@ -7,7 +7,6 @@
         integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
     <link rel="stylesheet" href="/assets/css/style.css" type="text/css" />
     <script src="https://code.jquery.com/jquery.js"></script>
-    <script src="/assets/js/burgerJS.js"></script>
     <title>Burgers</title>
 </head>
 
@@ -16,5 +15,43 @@
     {{{body}}}
 
 </body>
+<script>
+
+    $(".create-form").on("submit", function (event) {
+        event.preventDefault();
+
+        var newBurger = {
+            burger_name: $("#newBurger").val().trim()
+        };
+
+        $.ajax("/api/burgers", {
+            type: "POST",
+            data: newBurger
+        }).then(
+            function () {
+                console.log("Created a new burger.");
+                // Reload the page to get the updated list
+                location.reload();
+            }
+        );
+    });
+
+    $(".devourbtn").on("click", function (event) {
+        var id = $(this).data("id")
+        var changeBurger = {
+            devoured: 0
+        };
+        $.ajax("/api/burgers/" + id, {
+            type: "PUT",
+            data: changeBurger
+        }).then(
+            function () {
+                console.log("Burger Devoured");
+                location.reload();
+            }
+        );
+    });
+</script>
+
 
 </html>

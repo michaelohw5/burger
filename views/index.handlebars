@@ -1,12 +1,13 @@
 <div class="container">
     <div class="text-center">
-        <img src="https://cdn0.iconfinder.com/data/icons/food-2-11/128/food-13-512.png" alt="burger image"
+        <img src="http://www.myiconfinder.com/uploads/iconsets/256-256-8a98392e8674eb71887ee57b861dd1c0-Burger.png" alt="burger image"
             id="burgerimg">
     </div>
 
     <h1 class="text-center">BURGER DEVOURER</h1>
     <div class="row">
-        <div class="col-md-5 burger-box" id="not-devoured">
+        <div class="col-md-5 burger-box text-center" id="not-devoured">
+            <h2>Burgers to Devour</h2>
             <!-- Pass in data from server.js -->
             <ul class="list-group text-center">
                 {{#each burgers}}
@@ -20,12 +21,13 @@
             </ul>
         </div>
 
-        <!-- Forcing a space between the two columns -->
+        <!-- mid column in case something to add -->
         <div class="col-md-2" id="blank">
         </div>
 
         <!-- Right list: Burgers devoured -->
-        <div class="col-md-5 burger-box" id="devoured">
+        <div class="col-md-5 burger-box text-center" id="devoured">
+            <h2>Burgers Devoured</h2>
             <ul class="list-group">
                 {{#each burgers}}
                 {{#if devoured}}
@@ -38,42 +40,15 @@
         </div>
     </div>
 
-<script>
-    
-$(".create-form").on("submit", function(event) {
-    event.preventDefault();
+    <hr>
 
-    var newBurger = {
-        burger_name: $("#burgerInfo").val().trim()
-    };
+    <form class="create-form text-center">
+        <h3>Add a Burger!</h3>
+        <div class="form-group">
+            <label for="burger">Burger Name:</label>
+            <input type="text" id="newBurger" name="name">
+            <button class="btn btn-primary" type="submit">Add Burger</button>
+        </div>
 
-    $.ajax("/api/burgers", {
-        type: "POST",
-        data: newBurger
-    }).then(
-        function() {
-            console.log("Created a new burger.");
-            // Reload the page to get the updated list
-            location.reload();
-        }
-    );
-});
-
-$(".devourbtn").on("click", function(event) {
-    var id = $(this).data("id")
-    var changeBurger = {
-        devoured: 0
-    };
-    $.ajax("/api/burgers/" + id, {
-        type: "PUT",
-        data: changeBurger
-    }).then(
-        function () {
-            console.log("Burger Devoured");
-            location.reload();
-        }
-    );
-});
-</script>
-
+    </form>
 </div>

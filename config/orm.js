@@ -12,7 +12,7 @@ var orm = {
     //insert a burger into the table
     insertOne: function(burgerName, cb) {
         var queryString = "INSERT INTO burgers (burger_name, devoured) VALUES (?, false);"
-        connection.query(queryString, [tableName, burgerName], function(err, result) {
+        connection.query(queryString, [burgerName], function(err, result) {
             if (err) throw err;
             cb(result);
         })
