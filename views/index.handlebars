@@ -4,16 +4,16 @@
             id="burgerimg">
     </div>
 
-    <h1>BURGER DEVOURER</h1>
+    <h1 class="text-center">BURGER DEVOURER</h1>
     <div class="row">
         <div class="col-md-5 burger-box" id="not-devoured">
             <!-- Pass in data from server.js -->
-            <ul class="list-group">
+            <ul class="list-group text-center">
                 {{#each burgers}}
                 {{#unless devoured}}
                 <li class="list-group-item">
                     <span class="label" id={{this.id}}> {{this.id}}, {{this.burger_name}} </span>
-                    <button type="button" id={{this.id}}+"_button">DEVOUR!</button>
+                    <button type="button" id={{this.id}}+"_button" class="devourbtn">DEVOUR!</button>
                 </li>
                 {{/unless}}
                 {{/each}}
@@ -38,6 +38,42 @@
         </div>
     </div>
 
+<script>
+    
+$(".create-form").on("submit", function(event) {
+    event.preventDefault();
 
+    var newBurger = {
+        burger_name: $("#burgerInfo").val().trim()
+    };
+
+    $.ajax("/api/burgers", {
+        type: "POST",
+        data: newBurger
+    }).then(
+        function() {
+            console.log("Created a new burger.");
+            // Reload the page to get the updated list
+            location.reload();
+        }
+    );
+});
+
+$(".devourbtn").on("click", function(event) {
+    var id = $(this).data("id")
+    var changeBurger = {
+        devoured: 0
+    };
+    $.ajax("/api/burgers/" + id, {
+        type: "PUT",
+        data: changeBurger
+    }).then(
+        function () {
+            console.log("Burger Devoured");
+            location.reload();
+        }
+    );
+});
+</script>
 
 </div>
