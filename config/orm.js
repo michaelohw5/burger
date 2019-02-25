@@ -23,8 +23,6 @@ var orm = {
 
 		connection.query(queryString, [columnInput, condition], function(err, result) {
 			if (err) throw err;
-			
-			console.log(result);
 			cb(result);
 		});
 	}
